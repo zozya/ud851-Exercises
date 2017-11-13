@@ -26,7 +26,7 @@
     android:layout_height="match_parent">
 
     <!--TODO (6) Delete this TextView-->
-   
+
 
     <!--TODO (7) Add an EditText-->
     <!--TODO (8) Give the EditText an id of @+id/et_search_box-->
