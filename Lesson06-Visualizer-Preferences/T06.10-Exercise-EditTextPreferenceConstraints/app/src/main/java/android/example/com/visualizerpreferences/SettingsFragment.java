@@ -27,9 +27,9 @@ import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceScreen;
 import android.widget.Toast;
 
-// TODO (1) Implement OnPreferenceChangeListener
+// DONE (1) Implement OnPreferenceChangeListener
 public class SettingsFragment extends PreferenceFragmentCompat implements
-        OnSharedPreferenceChangeListener {
+        OnSharedPreferenceChangeListener, Preference.OnPreferenceChangeListener {
 
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
@@ -38,7 +38,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
         addPreferencesFromResource(R.xml.pref_visualizer);
 
         SharedPreferences sharedPreferences = getPreferenceScreen().getSharedPreferences();
-        PreferenceScreen prefScreen = getPreferenceScreen();
+        PreferenceScreen prefScreen = this.getPreferenceScreen();
         int count = prefScreen.getPreferenceCount();
 
         // Go through all of the preferences, and set up their preference summary.
@@ -51,7 +51,9 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
                 setPreferenceSummary(p, value);
             }
         }
-        // TODO (3) Add the OnPreferenceChangeListener specifically to the EditTextPreference
+        // DONE(3) Add the OnPreferenceChangeListener specifically to the EditTextPreference
+        Preference preference = findPreference(getString(R.string.pref_size_key));
+        preference.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -88,10 +90,43 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
         }
     }
 
-    // TODO (2) Override onPreferenceChange. This method should try to convert the new preference value
+    // DONE (2) Override onPreferenceChange. This method should try to convert the new preference value
     // to a float; if it cannot, show a helpful error message and return false. If it can be converted
     // to a float check that that float is between 0 (exclusive) and 3 (inclusive). If it isn't, show
     // an error message and return false. If it is a valid number, return true.
+
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        {
+
+            String sizeKey = getString(R.string.pref_size_key);
+            if (preference.getKey().equals(sizeKey)) {
+                String stringSize = ((String) (newValue)).trim();
+                if (stringSize == null)
+                    stringSize = getString(R.string.pref_size_default);
+
+                try {
+                    float size = Float.parseFloat(stringSize);
+                    if (size > 3 || size <= 0) {
+                        String sError = getString(R.string.pref_size_wrong_size_error);
+                        Toast error = Toast.makeText(getContext(), sError, Toast.LENGTH_SHORT);
+                        error.show();
+                        return false;
+                    }
+                } catch (NumberFormatException nfe) {
+                    String sError = getString(R.string.pref_size_float_error);
+                    Toast error = Toast.makeText(getContext(), sError, Toast.LENGTH_SHORT);
+                    error.show();
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }
+
+   
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
