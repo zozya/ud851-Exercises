@@ -24,7 +24,7 @@ public class WaitlistDbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         final String SQL_CREATE_WAITLIST_TABLE = "CREATE TABLE " +
                 WaitlistContract.WaitlistEntry.TABLE_NAME + "(" +
-                WaitlistContract.WaitlistEntry._ID + " INTEGER PRIMARY KEY AUTOINCRMENT," +
+                WaitlistContract.WaitlistEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 WaitlistContract.WaitlistEntry.COLUMN_GUEST_NAME + " TEXT NOT NULL, " +
                 WaitlistContract.WaitlistEntry.COLUMN_PARTY_SIZE + " INTEGER NOT NULL, " +
                 WaitlistContract.WaitlistEntry.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP" +
