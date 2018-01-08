@@ -162,15 +162,15 @@ public class TaskContentProvider extends ContentProvider {
 
         // DONE (2) Write the code to delete a single row of data
         // [Hint] Use selections to delete an item by its row ID
-        int ret = 0;
+        int ret;
         switch(match) {
             case TASK_WITH_ID:
                 String id = uri.getPathSegments().get(1);
                 String mSelection = "=?";
                 String[] mSelectionArgs = new String[]{id};
                 ret =  db.delete(TaskContract.TaskEntry.TABLE_NAME,
-                        TaskContract.TaskEntry._ID +  "=" + id,
-                        null);
+                        mSelection,
+                        mSelectionArgs);
                 break;
 
             default:
@@ -179,7 +179,9 @@ public class TaskContentProvider extends ContentProvider {
         }
         // DONE (3) Notify the resolver of a change and return the number of items deleted
 
-        getContext().getContentResolver().notifyChange(uri, null);
+        if(ret != 0)
+            getContext().getContentResolver().notifyChange(uri, null);
+        
         return ret;
     }
 
