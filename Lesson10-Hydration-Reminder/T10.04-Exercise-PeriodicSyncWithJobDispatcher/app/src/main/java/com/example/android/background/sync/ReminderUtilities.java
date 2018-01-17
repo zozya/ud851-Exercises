@@ -31,9 +31,10 @@ import java.util.concurrent.TimeUnit;
 public class ReminderUtilities {
     // DONE (15) Create three constants and one variable:
     //  - REMINDER_INTERVAL_SECONDS should be an integer constant storing the number of seconds in 15 minutes
-    private static final int REMINDER_INTERVAL_SECONDS = 15;
+    private static final int REMINDER_INTERVAL_MINUTS = 15;
+    private static final int REMINDER_INTERVAL_SECONDS = (int) TimeUnit.MINUTES.toSeconds(REMINDER_INTERVAL_MINUTS);
     //  - SYNC_FLEXTIME_SECONDS should also be an integer constant storing the number of seconds in 15 minutes
-    private static final int SYNC_FLEXTIME_SECONDS = (int) TimeUnit.MINUTES.toSeconds(REMINDER_INTERVAL_SECONDS);
+    private static final int SYNC_FLEXTIME_SECONDS = REMINDER_INTERVAL_SECONDS;
     //  - REMINDER_JOB_TAG should be a String constant, storing something like "hydration_reminder_tag"
     private static final String REMINDER_JOB_TAG = "hydration_reminder_tag";
     //  - sInitialized should be a private static boolean variable which will store whether the job
