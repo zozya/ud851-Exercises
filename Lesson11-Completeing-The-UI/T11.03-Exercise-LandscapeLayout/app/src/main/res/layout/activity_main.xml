@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    TODO (1) Create a new xml file called flight_info in the layout directory
-    TODO (2) Create a new xml file called boarding_info in the layout directory
+    DONE (1) Create a new xml file called flight_info in the layout directory
+    DONE (2) Create a new xml file called boarding_info in the layout directory
 
-    TODO (9) Copy activity_main.xml into the layout-land folder to have 2 layout xml files for the same activity
-    TODO (10) Re-organize the views in the landscape file to fit all in the one screen
+    DONE (9) Copy activity_main.xml into the layout-land folder to have 2 layout xml files for the same activity
+    DONE (10) Re-organize the views in the landscape file to fit all in the one screen
 -->
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -49,9 +49,18 @@
             tools:layout_constraintTop_creator="1" />
 
 <!--
-    TODO (3) Move all Views in the flight information section from activity_main to flight_info
-    TODO (5) Add an include tag in activity_main to include flightInfo in the right position
+    DONE (3) Move all Views in the flight information section from activity_main to flight_info
+    DONE (5) Add an include tag in activity_main to include flightInfo in the right position
 -->
+        <include app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewPassengerName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:id="@+id/flight_info"
+            layout="@layout/flight_info"
+            />
 
         <ImageView
             android:id="@+id/leftRectangle"
@@ -233,9 +242,23 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewArrivalTimeLabel" />
 
 <!--
-    TODO (4) Move all Views in the boarding information table from activity_main to boarding_info
-    TODO (6) Add an include tag in activity_main to include boardingInfo in the right position
+    DONE (4) Move all Views in the boarding information table from activity_main to boarding_info
+    DONE (6) Add an include tag in activity_main to include boardingInfo in the right position
 -->
+
+        <include app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewArrivalTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:id="@+id/boarding_info"
+            layout="@layout/boarding_info"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            />
 
         <ImageView
             android:id="@+id/tableHeaderImage"
